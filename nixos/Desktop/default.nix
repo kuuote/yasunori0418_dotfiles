@@ -7,6 +7,7 @@
   ...
 }:
 {
+  environment.etc.dotfiles.source = ../../.;
   imports =
     let
       hardwareModules = with nixos-hardware.nixosModules; [
