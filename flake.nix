@@ -37,7 +37,7 @@
       neovim-nightly-overlay,
       vim-overlay,
       ...
-    }:
+    }@inputs:
     let
       flakeRoot = self;
       nixpkgsOverlay = "${flakeRoot}/nix-overlays";
@@ -58,6 +58,7 @@
             { profileName, system }:
             import ./nixos {
               inherit
+                inputs
                 nixos-hardware
                 xremap-flake
                 nixosSettings

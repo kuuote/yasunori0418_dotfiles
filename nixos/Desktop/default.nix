@@ -1,7 +1,9 @@
 {
+  inputs,
   nixos-hardware,
   nixosSettings, # ../settings
   xremap-flake,
+  system,
   ...
 }:
 {
@@ -58,6 +60,30 @@
       xss-i3lock = "${nixosSettings}/applications/xss-i3lock.nix";
     in
     [
+      inputs.home-manager.nixosModules.home-manager
+      (
+        let
+          homeManagerConfig = import ../../home-manager {
+            profileName = "linux";
+            inherit system;
+            inherit (inputs)
+              nixpkgs
+              wezterm-flake
+              neovim-nightly-overlay
+              vim-overlay
+              ;
+            homeManager = ../../home-manager;
+          };
+        in
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = homeManagerConfig.extraSpecialArgs;
+          home-manager.users.yasunori = {
+            imports = homeManagerConfig.modules;
+          };
+        }
+      )
       hardware
       extraMountFilesystems
       nvidia

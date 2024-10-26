@@ -1,4 +1,5 @@
 {
+  inputs,
   nixos-hardware,
   xremap-flake,
   nixosSettings,
@@ -9,7 +10,13 @@
 {
   inherit system;
   specialArgs = {
-    inherit nixos-hardware nixosSettings xremap-flake;
+    inherit
+      inputs
+      nixos-hardware
+      nixosSettings
+      xremap-flake
+      system
+      ;
   };
   modules = [
     ./${profileName}
