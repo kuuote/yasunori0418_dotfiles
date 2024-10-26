@@ -6,7 +6,6 @@
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
       noto-fonts-emoji
-      nerdfonts
       hackgen-nf-font
     ];
     fontDir.enable = true;
